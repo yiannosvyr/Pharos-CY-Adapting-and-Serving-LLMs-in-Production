@@ -1,0 +1,60 @@
+# Session 1 — Adapting & Serving LLMs
+# Pharos-CY · Cyprus University of Technology
+#
+# ── WHICH ENVIRONMENT AM I IN? ───────────────────────────────────────────────
+#
+# Colab (the main lab):  DO NOT run `pip install -r requirements.txt`.
+#   Run the first cell of session1.ipynb instead. It installs the same pinned
+#   versions but deliberately leaves Colab's preinstalled torch / torchvision /
+#   torchaudio / CUDA wheels alone. Installing torch from this file on Colab is
+#   what produces the "PyTorch compiled for CUDA X / TorchAudio compiled for
+#   CUDA Y" breakage.
+#
+# HPC / local GPU box:  a fresh venv, then `pip install -r requirements.txt`.
+#
+# vLLM is NOT in the training list. It ships its own torch/CUDA build and must
+# live in its own environment — see the serving section at the bottom.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Training lab (session1.ipynb, train_qlora.py) ────────────────────────────
+# Install torch FIRST, from the index that matches your CUDA driver, e.g.
+#   pip install torch --index-url https://download.pytorch.org/whl/cu124
+# On Colab torch is already present — never reinstall it there.
+torch>=2.4
+
+# These pins match session1.ipynb's setup cell exactly. They are pinned, not
+# ">=", because this course has been bitten twice by API drift:
+#   * TRL renamed SFTConfig.max_seq_length -> max_length
+#   * Transformers 5 removed TrainingArguments.warmup_ratio (use warmup_steps)
+transformers==5.16.1
+trl==1.12.0
+peft==0.20.0
+datasets==5.0.1
+accelerate==1.14.0
+sentence-transformers==6.0.1
+
+# 4-bit QLoRA. Left UNPINNED on purpose: it is a CUDA binary wheel and must be
+# free to match whatever CUDA build your torch was compiled against. GPU only.
+bitsandbytes
+
+# Why this set cannot break a Colab GPU runtime (checked against PyPI metadata):
+# the strictest torch requirement anywhere in the list above is bitsandbytes'
+# "torch>=2.4,<3", and the strictest numpy requirement is "numpy>=1.24".
+# Colab's 2026.07 image ships torch 2.11 and numpy 2.0.2, so pip leaves torch,
+# torchvision, torchaudio and every nvidia-* wheel untouched. The only binary it
+# can still replace is pyarrow, which the notebook's restart guard handles.
+
+# Pulled in by datasets (>= 21 is required). Listed for visibility only — do not
+# pin it by hand: on Colab an in-place pyarrow upgrade needs a kernel restart,
+# which the notebook's setup cell detects and performs automatically.
+# pyarrow>=21
+
+numpy>=1.26
+requests
+
+# ── Serving lab (serve_vllm_rag.py) — SEPARATE ENVIRONMENT ───────────────────
+# Do NOT install these next to the training stack above, and never on Colab.
+# Make a second venv/container and install:
+#     pip install "vllm>=0.10" sentence-transformers
+# vllm will pull the exact torch build it was compiled against; let it.
+# vllm>=0.10

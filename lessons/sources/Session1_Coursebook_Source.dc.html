@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    /* PHAROS-CY / CUT training palette — neutral surfaces, charcoal-navy text, one blue accent */
+    --bg:#eef1f5;            /* page background */
+    --surface:#ffffff;       /* cards */
+    --surface-2:#f6f8fb;     /* widget panels, soft boxes */
+    --surface-3:#e6ebf2;     /* inline code, chips, subtle fills */
+    --line:#d5dbe5;          /* borders */
+    --line-2:#c3cbd8;        /* stronger borders */
+    --ink:#1c2533;           /* headings, strong text */
+    --ink-2:#2f3a4a;         /* body text */
+    --ink-3:#4b5768;         /* secondary text */
+    --muted:#616c7a;         /* captions, labels */
+    --navy:#16233f;          /* dark surfaces: sidebar, hero, formula boxes */
+    --navy-2:#1f2f4d;        /* dark surface, secondary */
+    --on-navy-2:#c5cddc;     /* secondary text on dark */
+    --on-navy-3:#8d99af;     /* muted text on dark */
+    --accent:#1e5aa8;        /* primary accent (links, buttons, labels) */
+    --accent-2:#174a8c;      /* accent, strong / hover */
+    --accent-soft:#e6eef9;   /* accent tint background */
+    --accent-line:#b9cfea;   /* accent tint border */
+    --accent-on-dark:#9cc3f0;/* accent on dark surfaces */
+    --ok:#22795a;            /* success / positive */
+    --ok-soft:#e4f1ea;
+    --warn:#7d5a12;          /* warning text */
+    --warn-soft:#f8f2e2;     /* warning background */
+    --warn-line:#e0cf9f;     /* warning border */
+    --warn-accent:#b07a2a;   /* warning accent / third data colour */
+    --danger:#a13a2d;        /* negative / unsafe */
+    --danger-soft:#f7e6e3;
+    --code-bg:#13203a;       /* code blocks */
+    --code-head:#0f1a30;
+    --code-fg:#e7ecf6;
+    --code-k:#8fc1ff;        /* code keyword highlight */
+    --code-c:#8391b3;        /* code comments */
+    --code-btn:#24304b;
+    --code-btn-fg:#c9d4ea;
+    --code-label:#8ea0c4;
+  }
+  doc-page:not(:defined){visibility:hidden}
+
+  *{box-sizing:border-box}
+  h1,h2,h3{font-family:'Space Grotesk',sans-serif;color:var(--ink);letter-spacing:-.4px}
+  p,li,td{font-family:'IBM Plex Sans',sans-serif;color:var(--ink-2);line-height:1.62;font-size:11pt}
+  code{font-family:'IBM Plex Mono',monospace;font-size:9.5pt;background:var(--surface-3);padding:1px 4px;border-radius:3px;color:var(--accent-2)}
+  .lead{font-size:12pt;color:var(--ink-3)}
+  .kbox{background:var(--surface-2);border:1px solid var(--line);border-left:4px solid var(--accent);border-radius:8px;padding:12px 16px;margin:14px 0;break-inside:avoid}
+  .kbox.teal{border-left-color:var(--ok)}
+  .kbox .kh{font-family:'Space Grotesk';font-weight:600;color:var(--ink);font-size:10.5pt}
+  pre{font-family:'IBM Plex Mono',monospace;font-size:8.8pt;line-height:1.55;background:var(--code-bg);color:var(--code-fg);padding:14px 16px;border-radius:8px;overflow:hidden;white-space:pre-wrap;break-inside:avoid;margin:12px 0}
+  pre .c{color:var(--code-c)}
+  pre .k{color:var(--code-k)}
+  .les{break-before:page}
+  .tag{display:inline-block;background:var(--accent-soft);color:var(--accent-2);font-size:8.5pt;font-weight:600;border-radius:100px;padding:2px 10px;font-family:'IBM Plex Sans';letter-spacing:.02em}
+  .lnum{font-family:'IBM Plex Sans';font-size:9pt;letter-spacing:.16em;text-transform:uppercase;color:var(--accent);font-weight:600}
+  table.toc{width:100%;border-collapse:collapse;margin-top:8px}
+  table.toc td{padding:7px 4px;border-bottom:1px solid var(--line);font-size:10.5pt;vertical-align:top}
+  table.toc td.n{width:34px;color:var(--accent);font-weight:600;font-family:'Space Grotesk'}
+  table.toc td.d{width:70px;color:var(--muted);text-align:right;font-size:9.5pt}
+  ul.clean{list-style:none;padding-left:0;margin:8px 0}
+  ul.clean li{padding-left:18px;position:relative;margin:5px 0}
+  ul.clean li:before{content:"›";position:absolute;left:2px;color:var(--accent);font-weight:700}
+</style>
+<script src="./doc-page.js"></script>
+</helmet>
+<doc-page margin="0.8in">
+
+  <div slot="header" style="font-family:'IBM Plex Sans';font-size:8pt;color:var(--muted);display:flex;justify-content:space-between;border-bottom:1px solid var(--line);padding-bottom:5px">
+    <span>Building Production Generative AI · Deep Learning II</span><span>Session 1 — Adapting &amp; Serving LLMs</span>
+  </div>
+  <div slot="footer" style="font-family:'IBM Plex Sans';font-size:8pt;color:var(--muted);display:flex;justify-content:space-between;border-top:1px solid var(--line);padding-top:5px">
+    <span>Cyprus University of Technology · PHAROS · WP7 Training</span><span>Instructors: Yiannos Vyrides · Kyriakosevmenios N. Nomikos</span>
+  </div>
+
+  <!-- COVER -->
+  <div style="border-radius:14px;background:var(--navy);color:#fff;padding:40px 38px;margin-bottom:26px">
+    <div style="font-family:'IBM Plex Sans';font-size:9pt;letter-spacing:.16em;text-transform:uppercase;color:var(--accent-on-dark);font-weight:600">Course material · Session 1</div>
+    <h1 style="color:#fff;font-size:30pt;line-height:1.05;margin:12px 0 0">Adapting &amp; Serving LLMs in Production</h1>
+    <p style="color:var(--on-navy-2);font-size:12pt;line-height:1.5;margin-top:14px;max-width:520px">Take a base model, teach it a skill without breaking it, then serve it to real users without the GPU falling over. SFT · GRPO · LoRA/QLoRA · KV-cache · vLLM · RAG.</p>
+    <div style="display:flex;gap:30px;margin-top:22px;font-family:'IBM Plex Sans'">
+      <div><div style="font-family:'Space Grotesk';font-weight:700;font-size:15pt;color:#fff">~2 h</div><div style="font-size:8.5pt;color:var(--on-navy-3)">8 lessons</div></div>
+      <div><div style="font-family:'Space Grotesk';font-weight:700;font-size:15pt;color:#fff">1 GPU</div><div style="font-size:8.5pt;color:var(--on-navy-3)">Colab T4 is enough</div></div>
+      <div><div style="font-family:'Space Grotesk';font-weight:700;font-size:15pt;color:#fff">Intermediate</div><div style="font-size:8.5pt;color:var(--on-navy-3)">PyTorch basics</div></div>
+    </div>
+  </div>
+
+  <h2 style="font-size:15pt;margin:0 0 4px">Contents</h2>
+  <table class="toc">
+    <tr><td class="n">1</td><td>Supervised fine-tuning &amp; the epochs trap</td><td class="d">Adapting</td></tr>
+    <tr><td class="n">2</td><td>Beyond imitation: GRPO &amp; group-relative advantage</td><td class="d">Adapting</td></tr>
+    <tr><td class="n">3</td><td>Reward design &amp; reward hacking</td><td class="d">Adapting</td></tr>
+    <tr><td class="n">4</td><td>LoRA &amp; QLoRA: winning twice</td><td class="d">Adapting</td></tr>
+    <tr><td class="n">5</td><td>The KV-cache nobody budgets for</td><td class="d">Serving</td></tr>
+    <tr><td class="n">6</td><td>Serving at scale: vLLM &amp; PagedAttention</td><td class="d">Serving</td></tr>
+    <tr><td class="n">7</td><td>Grounding answers with RAG</td><td class="d">Serving</td></tr>
+    <tr><td class="n">8</td><td>Wrap-up: run the notebook end-to-end</td><td class="d">Lab</td></tr>
+  </table>
+  <div class="kbox teal" style="margin-top:20px">
+    <div class="kh">Before you start</div>
+    <ul class="clean" style="margin-bottom:0">
+      <li>PyTorch basics — tensors and a training loop.</li>
+      <li>A GPU runtime. In Colab: <i>Runtime → Change runtime type → GPU</i> (a T4 is enough).</li>
+      <li>The notebook <code>notebooks/session1.ipynb</code> — the first cell installs everything.</li>
+    </ul>
+  </div>
+  <div class="kbox" style="margin-top:12px">
+    <div class="kh">Refresher · the four ideas every lesson builds on</div>
+    <ul class="clean" style="margin-bottom:0">
+      <li><b>Tokens &amp; next-token prediction.</b> Text becomes tokens (integer IDs); the model outputs a logit per vocabulary entry and a softmax gives p<sub>θ</sub>(x<sub>t</sub> | x<sub>&lt;t</sub>), the probability of the next token. θ = all trainable parameters. Generation = pick a token, append, repeat.</li>
+      <li><b>One transformer layer.</b> L identical layers; in each, every token computes Query, Key and Value vectors (Q = XW<sub>Q</sub>, K = XW<sub>K</sub>, V = XW<sub>V</sub>) and attends to earlier tokens: Attention(Q,K,V) = softmax(QKᵀ/√d<sub>k</sub>)·V, in H heads of width d<sub>h</sub> (d<sub>model</sub> = H·d<sub>h</sub>), then a small MLP. The K and V of every past token, per layer and head, are what the KV-cache (Lesson 5) stores.</li>
+      <li><b>What training changes.</b> A loss — for LLMs the cross-entropy 𝓛(θ) = −Σ<sub>t</sub> log p<sub>θ</sub>(x<sub>t</sub> | x<sub>&lt;t</sub>) — is minimised by repeating forward pass → loss → backward pass (gradient ∂𝓛/∂θ) → optimizer step θ ← θ − learning rate × gradient. A batch = the examples in one step; an epoch = one pass over the data. Fine-tuning is this loop from the pretrained θ on your data (with LoRA, on a few extra parameters).</li>
+      <li><b>Training vs inference.</b> Training sees the whole sequence at once (teacher forcing); inference generates one token at a time and feeds it back — so decoding rules and the KV-cache only matter at serving time.</li>
+    </ul>
+  </div>
+
+  <!-- L1 -->
+  <div class="les">
+    <div class="lnum">Lesson 1 · Adapting</div>
+    <h2 style="font-size:17pt;margin:4px 0 10px">Supervised fine-tuning &amp; the epochs trap</h2>
+    <span class="tag">Objective · why longer training makes the model worse</span>
+    <p style="margin-top:14px">SFT is <b>imitation</b>: you show the model <code>(prompt, response)</code> pairs and it copies the format. The counter-intuitive part for most people is that <b>training longer makes it worse</b>. After the first one to three epochs the model has stopped learning the <i>skill</i> and started memorising your <i>examples</i> — quietly overwriting the broad, general ability it arrived with.</p>
+    <p>Two failure modes ride together: <b>catastrophic forgetting</b> (general skills get pressed out) and <b>style overfitting</b> (it memorises the <i>shape</i> — always three bullets, always the same length — without the underlying skill). The fix is boring and reliable: <b>1–3 epochs, a low learning rate, and mix 10–20% general data back in.</b></p>
+    <div class="kbox"><div class="kh">Anchor it</div>More epochs is not more learning — it is more forgetting.</div>
+    <div class="kbox teal"><div class="kh">What the trainer minimises</div>For a prompt <b>x</b> and a response <b>y = (y<sub>1</sub>, …, y<sub>T</sub>)</b>: &nbsp;<span style="font-family:'IBM Plex Mono'">𝓛<sub>SFT</sub>(θ) = − Σ<sub>t=1..T</sub> log p<sub>θ</sub>(y<sub>t</sub> | x, y<sub>&lt;t</sub>)</span> — the pretraining cross-entropy on curated data, where x is the prompt as the model's <b>chat template</b> lays it out and θ the trainable parameters (with LoRA, the adapter). <b>Loss masking:</b> the sum runs over response tokens only; prompt tokens get label −100 (TRL does this from the <code>prompt</code>/<code>completion</code> fields with <code>completion_only_loss=True</code>). <b>Same template at training and inference</b>, or the model looks worse although the weights are fine. SFT shapes behaviour; it does not add facts.</div>
+    <pre><span class="c"># 1 epoch, low LR — resist the urge to run it for 20</span>
+args = SFTConfig(output_dir="./adapter", <span class="k">num_train_epochs=1</span>,
+                 <span class="k">learning_rate=2e-5</span>, lr_scheduler_type="cosine",
+                 warmup_steps=10, per_device_train_batch_size=2,
+                 gradient_accumulation_steps=8, max_length=1024,
+                 <span class="k">completion_only_loss=True</span>,   <span class="c"># loss on the response tokens only</span>
+                 <span class="k">bf16=use_bf16, fp16=(device == "cuda" and not use_bf16)</span>)</pre>
+    <p style="font-size:9.5pt;color:var(--muted)"><b>In the lab:</b> drag the epochs slider and watch task-skill saturate while general ability decays — effective quality peaks at 1–3 epochs.</p>
+  </div>
+
+  <!-- L2 -->
+  <div class="les">
+    <div class="lnum">Lesson 2 · Adapting</div>
+    <h2 style="font-size:17pt;margin:4px 0 10px">Beyond imitation: GRPO &amp; group-relative advantage</h2>
+    <span class="tag">Objective · why we divide by the group's standard deviation</span>
+    <p style="margin-top:14px">SFT can't optimise “is this correct?” or “is this safe?” — those aren't clean labels in the data. GRPO can. It samples a <b>group</b> of answers to the same prompt, scores each, then <b>standardises within the group</b> before using the scores:</p>
+    <div style="text-align:center;font-family:'IBM Plex Mono';font-size:14pt;background:var(--navy);color:#fff;border-radius:8px;padding:14px;margin:14px 0">A<sub>ij</sub> = ( r<sub>ij</sub> − μ<sub>i</sub> ) / ( σ<sub>i</sub> + ε )</div>
+    <p style="font-size:10pt;color:var(--ink-3)">For prompt <i>i</i> with a group of G sampled answers: r<sub>ij</sub> = the reward of answer <i>j</i> · μ<sub>i</sub> = the group's mean reward · σ<sub>i</sub> = its standard deviation · ε = a small constant that avoids dividing by zero · A<sub>ij</sub> = the <b>advantage</b>, how much better answer <i>j</i> is than its siblings. The group is the baseline, so no separate value network (critic) is needed.</p>
+    <p><b>Subtracting the mean</b> says whether an answer is better or worse than its siblings. <b>Dividing by σ</b> is the part people skip, and it's the part that makes training stable: it puts every prompt group on the same scale, so “clearly the best answer here” counts equally whether rewards ran 1–5 or were bunched between 4 and 5. Every prompt type gets an equal vote in the update.</p>
+    <table style="width:100%;border-collapse:collapse;margin:8px 0 4px;font-size:9.5pt">
+      <tr style="color:var(--muted);font-size:8.5pt;text-transform:uppercase;letter-spacing:.06em"><td style="padding:4px">Prompt</td><td>Rewards</td><td>μ</td><td>σ</td><td>Best, mean-subtracted</td><td>Best, standardised</td></tr>
+      <tr style="border-top:1px solid var(--line)"><td style="padding:5px 4px">Safety-critical</td><td style="font-family:'IBM Plex Mono';font-size:9pt">0.5 · 5.0 · 1.0 · 4.5 · 2.0 · 5.0</td><td>3.00</td><td>1.89</td><td>+2.00</td><td>+1.06</td></tr>
+      <tr style="border-top:1px solid var(--line)"><td style="padding:5px 4px">Simple definition</td><td style="font-family:'IBM Plex Mono';font-size:9pt">4.0 · 4.2 · 4.5 · 4.1 · 4.3 · 4.0</td><td>4.18</td><td>0.18</td><td>+0.32</td><td>+1.79</td></tr>
+    </table>
+    <p style="font-size:10pt;color:var(--ink-3)">Mean-subtracted only, the definition prompt's best answer carries a 6× weaker signal than the safety prompt's, so the optimiser effectively ignores it; standardised, both get a clear positive advantage of comparable size.</p>
+    <pre><span class="c"># standardise rewards within each group:  A_ij = (r_ij - mu_i) / (sigma_i + eps)</span>
+def group_advantage(rewards, eps=1e-6, divide_by_sigma=True):
+    rewards = np.asarray(rewards, float)
+    centred = rewards - rewards.mean()
+    return centred / (rewards.std() + eps) if divide_by_sigma else centred
+
+group_advantage([0.5, 5.0, 1.0, 4.5, 2.0, 5.0])  <span class="c"># safety-critical: wide spread</span>
+group_advantage([4.0, 4.2, 4.5, 4.1, 4.3, 4.0])  <span class="c"># definition: bunched</span></pre>
+    <div class="kbox"><div class="kh">The trick</div>Subtract the mean for direction, divide by sigma for a comparable size. Skip the division and your best-behaved prompts quietly stop teaching the model anything.</div>
+    <div class="kbox teal"><div class="kh">The rest of the GRPO update</div>The advantages feed a PPO-style objective: the policy π<sub>θ</sub> is nudged to make high-advantage answers more likely through a clipped probability ratio ρ<sub>ij</sub> = π<sub>θ</sub>(y<sub>ij</sub> | q<sub>i</sub>) / π<sub>θold</sub>(y<sub>ij</sub> | q<sub>i</sub>), and a KL penalty with weight β keeps it near the SFT reference π<sub>ref</sub>: <span style="font-family:'IBM Plex Mono';font-size:9pt">𝓛(θ) = E[min(ρ<sub>ij</sub>A<sub>ij</sub>, clip(ρ<sub>ij</sub>, 1−ε<sub>clip</sub>, 1+ε<sub>clip</sub>)A<sub>ij</sub>)] − β·KL(π<sub>θ</sub> ‖ π<sub>ref</sub>)</span>. The notebook does not run this loop (it needs TRL's <code>GRPOTrainer</code> and a GPU budget); it isolates standardisation and reward design.</div>
+  </div>
+
+  <!-- L3 -->
+  <div class="les">
+    <div class="lnum">Lesson 3 · Adapting</div>
+    <h2 style="font-size:17pt;margin:4px 0 10px">Reward design &amp; reward hacking</h2>
+    <span class="tag">Objective · keep correctness and safety on separate axes</span>
+    <p style="margin-top:14px">If you collapse correctness and safety into <b>one number</b>, the model can look great while quietly gaming one dimension — high correctness, dangerous safety, and a single reward that hides it. This is <b>reward hacking</b>: the model optimises the metric, not the intent.</p>
+    <p>Keep them <b>separate</b>, put a <b>floor</b> on safety, and you can actually <i>see</i> which dimension is being gamed instead of averaging the problem away.</p>
+    <table style="width:100%;border-collapse:collapse;margin-top:8px">
+      <tr>
+        <td style="width:50%;vertical-align:top;padding-right:10px">
+          <div style="background:var(--danger-soft);color:var(--danger);font-size:8.5pt;font-weight:600;border-radius:5px;padding:2px 8px;display:inline-block;font-family:'IBM Plex Sans'">✗ Collapsed</div>
+          <pre style="margin-top:8px">r = 0.7*correct + 0.3*safe</pre>
+          <p style="font-size:9.5pt;color:var(--muted)">Scores run 1–5. A perfectly correct (5) but dangerous (1) answer gets 3.8 — looks “fine”, ships anyway.</p>
+        </td>
+        <td style="width:50%;vertical-align:top;padding-left:10px">
+          <div style="background:var(--ok-soft);color:var(--ok);font-size:8.5pt;font-weight:600;border-radius:5px;padding:2px 8px;display:inline-block;font-family:'IBM Plex Sans'">✓ Separate + floor</div>
+          <pre style="margin-top:8px">r = 0.7*correct + 0.3*safe
+if safe &lt; 4:
+    r = r - 5   <span class="c"># hard penalty</span></pre>
+          <p style="font-size:9.5pt;color:var(--muted)">The same answer now scores −1.2. Unsafe is unsafe, full stop; each axis stays visible.</p>
+        </td>
+      </tr>
+    </table>
+    <div class="kbox teal"><div class="kh">Rule of thumb</div>One number per thing you care about, a floor on the non-negotiable one, and never average safety into oblivion.</div>
+  </div>
+
+  <!-- L4 -->
+  <div class="les">
+    <div class="lnum">Lesson 4 · Adapting</div>
+    <h2 style="font-size:17pt;margin:4px 0 10px">LoRA &amp; QLoRA: winning twice</h2>
+    <span class="tag">Objective · LoRA is a regulariser AND a serving superpower</span>
+    <p style="margin-top:14px">LoRA freezes the big pretrained weight and learns a small <b>low-rank correction</b> next to it. Two wins, said explicitly:</p>
+    <ul class="clean">
+      <li><b>Win 1 · Regulariser.</b> Few free parameters ⇒ the model can only change the most important directions ⇒ it overfits less on ~20k samples.</li>
+      <li><b>Win 2 · Serving.</b> One base model on the GPU + tiny hot-swappable adapters. Three behaviours = one base + three adapters, not three full copies.</li>
+    </ul>
+    <div class="kbox teal"><div class="kh">The maths, in one line</div>A linear layer computes h = W·x with a frozen W ∈ ℝ<sup>d<sub>out</sub>×d<sub>in</sub></sup>. LoRA adds a low-rank correction: &nbsp;<span style="font-family:'IBM Plex Mono'">h = W·x + ΔW·x, &nbsp;ΔW = (α/r)·B·A, &nbsp;B ∈ ℝ<sup>d<sub>out</sub>×r</sup>, A ∈ ℝ<sup>r×d<sub>in</sub></sup>, r ≪ d</span>. r = the rank (<code>r=16</code>), α = <code>lora_alpha</code> (32), so the update is scaled by α/r = 2; only A and B get gradients; A random and B = 0 at init so training starts exactly at the base model. <b>Parameter count:</b> r·(d<sub>in</sub> + d<sub>out</sub>) instead of d<sub>in</sub>·d<sub>out</sub> per adapted matrix (2·d·r vs d² when square): Qwen's 896×896 <code>q_proj</code> at r = 16 trains 28,672 numbers instead of 802,816 (3.6%); over 7 matrices × 24 layers the adapter is 8.8 M parameters, ≈ 1.8% of the base. <b>QLoRA</b> keeps the frozen W in 4-bit NF4 and dequantises it on the fly: h = dequant(Ŵ)·x + ΔW·x.</div>
+    <pre><span class="c"># QLoRA: 4-bit frozen base, train a tiny low-rank adapter
+# ONE source of truth for every dtype — a T4 is sm_75 and cannot train bf16:</span>
+use_bf16 = device == "cuda" and <span class="k">torch.cuda.get_device_capability()[0] >= 8</span>
+compute_dtype = torch.bfloat16 if use_bf16 else torch.float16
+
+bnb = BitsAndBytesConfig(load_in_4bit=True, bnb_4bit_quant_type="nf4",
+        bnb_4bit_compute_dtype=compute_dtype, bnb_4bit_use_double_quant=True)
+model = AutoModelForCausalLM.from_pretrained(BASE, quantization_config=bnb,
+        dtype=compute_dtype, device_map="auto")   <span class="c"># never dtype="auto"</span>
+
+lora = LoraConfig(<span class="k">r=16</span>, lora_alpha=32, lora_dropout=0.05,
+        bias="none", task_type="CAUSAL_LM",
+        target_modules=["q_proj","k_proj","v_proj","o_proj",
+                        "gate_proj","up_proj","down_proj"])
+
+<span class="c"># SFTTrainer force-casts QLoRA adapters to bf16. On a T4 (fp16 + GradScaler)
+# there is no bf16 unscale kernel, so put the adapter back in fp32.</span>
+if not use_bf16:
+    for p in trainer.model.parameters():
+        if p.requires_grad and p.dtype == torch.bfloat16:
+            p.data = p.data.to(torch.float32)</pre>
+    <p style="font-size:9.5pt;color:var(--muted)"><b>In the lab:</b> pick a base model and a LoRA rank <code>r</code> — the trainable-params counter shows how little actually trains (often well under 1%).</p>
+  </div>
+
+  <div class="kbox"><div class="kh">The T4 bfloat16 trap</div>A Colab T4 is compute capability 7.5, so it trains in fp16 with a GradScaler, which has no bfloat16 kernel. Transformers 5 (<code>dtype="auto"</code> reads Qwen's bfloat16 config), <code>bnb_4bit_compute_dtype</code> and <code>SFTTrainer</code> (which force-casts QLoRA adapters to bf16) will each hand you bf16 regardless. Derive all of them from one capability check and re-check the adapter dtype afterwards.</div>
+    
+  <!-- L5 -->
+  <div class="les">
+    <div class="lnum">Lesson 5 · Serving</div>
+    <h2 style="font-size:17pt;margin:4px 0 10px">The KV-cache: the memory nobody budgets for</h2>
+    <span class="tag">Objective · why serving falls over, and why vLLM exists</span>
+    <p style="margin-top:14px">When people plan GPU memory they count the model weights and stop. Then a few users send long prompts and the server falls over. The thing they forgot is the <b>KV-cache</b>. Attention needs the Key and Value vectors of every earlier token; recomputing them for each new token would make generation quadratic, so the server keeps them — one K and one V per token, in every layer, for every key/value head. It grows with <b>sequence length × layers × heads</b> and can dwarf the weights.</p>
+    <div style="text-align:center;font-family:'IBM Plex Mono';font-size:12pt;background:var(--navy);color:#fff;border-radius:8px;padding:12px;margin:12px 0">M<sub>KV</sub> ≈ 2 · S · L · H<sub>kv</sub> · d<sub>h</sub> · b/8 &nbsp;bytes per sequence</div>
+    <p style="font-size:10pt;color:var(--ink-3)">S = sequence length (prompt + generated) · L = layers · H<sub>kv</sub> = key/value heads (= H, the attention heads, unless the model uses GQA/MQA) · d<sub>h</sub> = head dimension · b = bits per value (16 for FP16); the 2 is one Key + one Value tensor. For B concurrent sequences multiply by B.</p>
+    <div class="kbox"><div class="kh">Worked example</div>13B model (L = 40, H = 40, d<sub>h</sub> = 128), FP16, S = 4096: 2 · 4096 · 40 · 40 · 128 · 2 bytes = 3,355,443,200 bytes ≈ 3.36 GB for a <i>single</i> sequence, next to ≈ 26 GB of weights; 64 users at that context need ≈ 215 GB of cache. The weights are fixed — the cache scales with context × users, which is why long-context serving is dominated by the cache.</div>
+    <p>Two ways to shrink it: store the cache in <b>INT8</b> (b = 8, roughly halves it), or use <b>grouped-query attention</b> so query heads share Keys and Values (H<sub>kv</sub> ≪ H; Qwen2.5-0.5B has 14 query heads but only 2 KV heads). And this is the whole reason vLLM exists — next lesson.</p>
+  </div>
+
+  <!-- L6 -->
+  <div class="les">
+    <div class="lnum">Lesson 6 · Serving</div>
+    <h2 style="font-size:17pt;margin:4px 0 10px">Serving at scale: vLLM &amp; PagedAttention</h2>
+    <span class="tag">Objective · page the cache like OS virtual memory</span>
+    <p style="margin-top:14px">The naive server reserves one big <b>contiguous</b> block of cache per request, sized for the worst case — so most of it sits empty and you run out of room long before you run out of GPU. <b>PagedAttention</b> stores the KV-cache in small non-contiguous <b>blocks</b>, handed out on demand exactly like operating-system virtual memory. Waste drops to almost nothing, and the same card serves far more users. <b>Continuous batching</b> lets new requests join a running batch as others finish. The vLLM paper (Kwon et al., 2023) reports ≈ 24× the throughput of a naive 🤗 <code>generate</code> loop with under 4% of the cache wasted.</p>
+    <pre><span class="c"># PagedAttention + prefix caching + hot-swappable LoRA
+# Runs in the SEPARATE vLLM environment, never in the training runtime.
+# float16 + 0.80 fit a 16 GB T4; use bfloat16 on Ampere or newer.</span>
+llm = LLM(model="Qwen/Qwen2.5-0.5B-Instruct", dtype="float16",
+          <span class="k">gpu_memory_utilization=0.80</span>,
+          enable_prefix_caching=True,
+          enable_lora=True, max_model_len=2048)
+sp = SamplingParams(temperature=0.2, top_p=0.9, max_tokens=128)</pre>
+    <div class="kbox"><div class="kh">Run this in a separate environment</div>vLLM ships its own PyTorch/CUDA build, so <code>pip install vllm</code> inside the training runtime replaces Colab's wheels and breaks it. The Colab lab shows this code and generates with 🤗 Transformers instead; run it for real from <code>serve_vllm_rag.py</code> on a dedicated vLLM machine, carrying across the <code>./adapter</code> folder.</div>
+    <div class="kbox teal"><div class="kh">Serving superpower</div><code>enable_lora=True</code> lets one base model answer with different adapters per request — the LoRA win from Lesson 4, paid off at serving time.</div>
+  </div>
+
+  <!-- L7 -->
+  <div class="les">
+    <div class="lnum">Lesson 7 · Serving</div>
+    <h2 style="font-size:17pt;margin:4px 0 10px">Grounding answers with RAG</h2>
+    <span class="tag">Objective · answer from retrieved context, cite or say “unknown”</span>
+    <p style="margin-top:14px">Fine-tuning teaches a <i>skill</i>; it doesn't install <i>facts</i>. For grounded, up-to-date, citable answers you retrieve relevant context at query time and instruct the model to use <b>only</b> that context — or admit it doesn't know. The flow: <b>question → embed &amp; retrieve top-k → stuff context + cite → grounded answer</b>. An embedding model (<code>all-MiniLM-L6-v2</code>) maps any text to a 384-dimensional vector so similar meanings land close together; the corpus is embedded once, the question is embedded at query time, and the top-k passages by <b>cosine similarity</b> that pass a <b>gate</b> are pasted into the prompt with citation tags [0], [1], … (nothing above the gate → "no relevant passages found"); after generation the citation is <b>checked</b> against that list. A vector database (FAISS, Milvus) does the same retrieval at scale.</p>
+    <pre><span class="c"># retrieve -> gate -> cited context -> generate -> check the citation</span>
+embed = SentenceTransformer("all-MiniLM-L6-v2")
+C = embed.encode(corpus, convert_to_tensor=True)
+scores = util.cos_sim(embed.encode(q, convert_to_tensor=True), C)[0]
+docs = [corpus[i] for s, i in zip(*scores.topk(k)) if float(s) >= <span class="k">MIN_SIM</span>]   <span class="c"># gate: 0.35</span>
+
+ctx = "\n".join(f"[{i}] {d}" for i, d in enumerate(docs)) or "(no relevant passages found)"
+prompt = (f"Context:\n{ctx}\n\nQuestion: {q}\n\n"
+          <span class="k">"Rules:\n1. Answer in one or two sentences using ONLY the context above.\n"
+          "2. Finish with the citation of the item you used, e.g. [0].\n"
+          "3. If the context does not contain the answer, reply with exactly: unknown\n\n"</span>
+          'Example of a grounded answer: "Beam search keeps k candidates. [1]"\n'
+          'Example when the context does not help: "unknown"\n\nAnswer:')
+
+ids = tok(tok.apply_chat_template([{"role": "user", "content": prompt}],
+          tokenize=False, add_generation_prompt=True), return_tensors="pt")
+out = trainer.model.generate(**ids.to(trainer.model.device), max_new_tokens=96,
+                             do_sample=False, <span class="k">repetition_penalty=1.0</span>)   <span class="c"># copying must not be penalised</span>
+raw = tok.decode(out[0, ids["input_ids"].shape[1]:], skip_special_tokens=True).strip()
+cited = [int(i) for i in re.findall(r"\[(\d+)\]", raw)]
+print(raw if cited and all(i &lt; len(docs) for i in cited) and not raw.lower().startswith("unknown") else "unknown")</pre>
+    <div class="kbox"><div class="kh">The guardrail is the prompt</div>“Use ONLY the context; cite <code>[i]</code> or say unknown.” Grounding, a retrieval gate, citations that are checked, and a permission to refuse are what make an assistant trustworthy.</div>
+  </div>
+
+  <!-- L8 -->
+  <div class="les">
+    <div class="lnum">Lesson 8 · Lab</div>
+    <h2 style="font-size:17pt;margin:4px 0 10px">Wrap-up: run the notebook end-to-end</h2>
+    <p style="margin-top:14px">Put it together: fine-tune a small model with QLoRA, serve it with vLLM, and ground it with a RAG loop — the same pipeline scales to the production 13B settings shown in the notebook comments.</p>
+    <table style="width:100%;border-collapse:collapse;margin-top:8px">
+      <tr>
+        <td style="width:50%;vertical-align:top;padding-right:10px">
+          <div style="font-family:'Space Grotesk';font-weight:600;color:var(--accent);font-size:10.5pt">Run it on Colab</div>
+          <ol style="font-size:10.5pt;padding-left:18px;margin-top:6px"><li>Open Google Colab and upload <code>notebooks/session1.ipynb</code> from your course materials (<i>File → Upload notebook</i>)</li><li><i>Runtime → Change runtime type → GPU</i> (a T4 is enough)</li><li>Run the first cell — it installs everything</li></ol>
+        </td>
+        <td style="width:50%;vertical-align:top;padding-left:10px">
+          <div style="font-family:'Space Grotesk';font-weight:600;color:var(--ok);font-size:10.5pt">Or on HPC</div>
+          <ol style="font-size:10.5pt;padding-left:18px;margin-top:6px"><li>Request one GPU</li><li>Create a fresh venv</li><li><code>pip install -r requirements.txt</code></li></ol>
+        </td>
+      </tr>
+    </table>
+    <div style="background:var(--navy);border-radius:10px;padding:18px 22px;margin-top:16px;color:#fff;break-inside:avoid">
+      <div style="font-family:'Space Grotesk';font-weight:700;font-size:12pt">What you can now do</div>
+      <ul style="columns:2;column-gap:24px;list-style:none;padding:0;margin:10px 0 0;font-size:10pt;color:var(--on-navy-2);line-height:1.8">
+        <li>✓ Fine-tune without catastrophic forgetting</li>
+        <li>✓ Explain why GRPO standardises rewards</li>
+        <li>✓ Choose a LoRA rank and know the trade-off</li>
+        <li>✓ Budget the KV-cache before deploying</li>
+        <li>✓ Serve many users with vLLM / PagedAttention</li>
+        <li>✓ Ground answers with a citing RAG loop</li>
+      </ul>
+    </div>
+    <div class="kbox" style="margin-top:16px"><div class="kh">Optional self-study</div>The from-scratch 2D diffusion maths lives in <code>01_diffusion_from_scratch.ipynb</code>, distributed with Session 2 rather than in this package — reach for it before Session 2.</div>
+    <p style="text-align:center;margin-top:22px;font-family:'Space Grotesk';font-weight:700;font-size:13pt;color:var(--ink)">Next · Session 2 — Multimodal &amp; Diffusion</p>
+    <p style="text-align:center;font-size:9.5pt;color:var(--muted);margin-top:2px">CLIP/VLM · latent diffusion · VAE diagnostics · DDPM/DDIM · DDIM inversion · CFG.</p>
+  </div>
+
+</doc-page>
+</x-dc>
+</body>
+</html>
