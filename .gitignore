@@ -19,3 +19,6 @@ adapter.zip
 checkpoint-*/
 .env
 .env.*
+
+# Lesson authoring files are kept outside the participant repository
+lessons/sources/

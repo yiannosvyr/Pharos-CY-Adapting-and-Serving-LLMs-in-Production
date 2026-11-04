@@ -2,7 +2,7 @@
 
 ## Before the workshop
 
-Have a Google account and a laptop with a browser. Download and extract the complete repository so that the lesson pages and their supporting files remain together.
+Have a Google account and a laptop with a browser. Download and extract the repository.
 
 ## During the workshop
 
@@ -16,7 +16,6 @@ Only the notebook needs to be uploaded to Colab. The interactive lesson and [pre
 
 ## Optional follow-up resources
 
-- [Printable coursebook](lessons/sources/Session1_Coursebook_Source.dc.html): open locally and print to PDF.
 - [Standalone labs](labs/README.md): training and serving examples for your own GPU or HPC environment.
 
 Use the notebook's installation instructions in Colab. The standalone requirements file is for local or HPC training, and vLLM belongs in a separate serving environment.

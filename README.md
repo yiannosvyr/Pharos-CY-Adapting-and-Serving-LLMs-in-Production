@@ -34,8 +34,7 @@ The practical model is **Qwen/Qwen2.5-0.5B-Instruct**. Larger-model numbers in t
 ├── slides/
 │   └── Slides.pptx                 # Participant presentation
 ├── lessons/
-│   ├── Session1_Student.html        # Self-contained interactive lesson
-│   └── sources/                    # Editable lesson and printable coursebook
+│   └── Session1_Student.html        # Self-contained interactive lesson
 ├── notebooks/
 │   └── session1.ipynb               # Main Colab / Jupyter practical
 └── labs/
@@ -48,5 +47,3 @@ The practical model is **Qwen/Qwen2.5-0.5B-Instruct**. Larger-model numbers in t
 ## Optional standalone labs
 
 Use [the labs guide](labs/README.md) for local GPU or HPC workflows. The notebook manages its own Colab environment. Keep vLLM in a **separate serving environment**, following the dependency instructions in the materials.
-
-For a printable lesson summary, open [the coursebook](lessons/sources/Session1_Coursebook_Source.dc.html) in your browser and print to PDF. Keep its accompanying JavaScript files in the same folder.
